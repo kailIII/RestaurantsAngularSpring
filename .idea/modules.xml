@@ -2,7 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/.idea/Sql-Homework.iml" filepath="$PROJECT_DIR$/.idea/Sql-Homework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sql-Homework.iml" filepath="$PROJECT_DIR$/.idea/modules/Sql-Homework.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sql-Homework_main.iml" filepath="$PROJECT_DIR$/.idea/modules/Sql-Homework_main.iml" group="Sql-Homework" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/Sql-Homework_test.iml" filepath="$PROJECT_DIR$/.idea/modules/Sql-Homework_test.iml" group="Sql-Homework" />
     </modules>
   </component>
 </project>
