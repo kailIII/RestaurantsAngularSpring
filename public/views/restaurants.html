@@ -1,5 +1,4 @@
 <div class="span6">
-    Restaurants.html
     <table class="table table-striped table-condensed">
         <thead>
             <tr>
@@ -11,6 +10,8 @@
                 <th>Cuisine</th>
                 <th>Type</th>
                 <th>Price</th>
+                <th>&nbsp;</th>
+                <td>&nbsp;</th>
             </tr>
         </thead>
         <tbody>
@@ -23,8 +24,10 @@
                 <td>{{ restaurant.cuisine }}</td>
                 <td>{{ restaurant.type }}</td>
                 <td>{{ restaurant.price }}</td>
+                <td><a ng-click="editRestaurant(restaurant.id)" class="btn btn-small btn-primary">Edit</a></td>
+                <td><a ng-click="deleteRestaurant(restaurant.id)" class="btn btn-small btn-danger">Delete</a></td>
             </tr>
         </tbody>
     </table>
-    <a ng-click="createNewRestaurant()" class="btn btn-small">Add New Restaurant</a> 
+    <a ng-click="createRestaurant()" class="btn btn-small btn-primary">Add New Restaurant</a> 
 </div> 

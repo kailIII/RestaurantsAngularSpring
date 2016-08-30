@@ -1,15 +1,18 @@
+'use strict';
+
 var app = angular.module('restaurants.controllers', []);
 
 app.controller('RestaurantListController', ['$scope', 'RestaurantsFactory', 'RestaurantFactory', '$location', 
     function($scope, RestaurantsFactory, RestaurantFactory, $location) {
         //callback for editRestaurant() [ng-click]
         $scope.editRestaurant = function(restaurantId) {
+            console.log("editRestaurant("+restaurantId+")");
             $location.path('/restaurant-detail/' + restaurantId);
         };
 
         //callback for deleteRestaurant() [ng-click]
         $scope.deleteRestaurant = function(restaurantId) {
-            RestaurantFactory.delete({ id : restaurantId });
+            RestaurantFactory.delete({ id: restaurantId });
             $scope.restaurants = RestaurantsFactory.query();
         };
 
@@ -19,14 +22,13 @@ app.controller('RestaurantListController', ['$scope', 'RestaurantsFactory', 'Res
         };
 
         $scope.restaurants = RestaurantsFactory.query();
-
 }]);
 
 
-app.controller('RestaurantDetailController', ['ngRoute', '$scope', '$routeParams', 'RestaurantFactory', '$location',
+app.controller('RestaurantDetailController', ['$scope', '$routeParams', 'RestaurantFactory', '$location',
     function($scope, $routeParams, RestaurantFactory, $location) {
-
-        //callback for updateRestaurant
+        console.log('RestaurantDetailController');
+        //callback for updateRestaurant [ng-click]
         $scope.updateRestaurant = function() {
             RestaurantFactory.update($scope.restaurant);
             $location.path('/restaurants');
@@ -36,8 +38,13 @@ app.controller('RestaurantDetailController', ['ngRoute', '$scope', '$routeParams
         $scope.cancel = function() {
             $location.path('/restaurants');
         }
+        
+        console.log("$routeParams.id = "+$routeParams.id);
+        $scope.restaurant = RestaurantFactory.show({ id: $routeParams.id });
 
 }]);
+
+
 app.controller('RestaurantCreationController', ['$scope', 'RestaurantsFactory', '$location', 
     function($scope, RestaurantsFactory, $location) {
 

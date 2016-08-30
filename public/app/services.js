@@ -1,3 +1,5 @@
+'use strict';
+
 var services = angular.module('restaurants.services', ['ngResource']);
 
 services.factory('RestaurantsFactory', function($resource){

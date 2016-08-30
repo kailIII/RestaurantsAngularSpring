@@ -6,6 +6,8 @@ import com.theironyard.charlotte.orm.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * Created by charlesrath on 8/29/16.
  */
@@ -17,29 +19,45 @@ public class RestaurantRestController {
     @Autowired
     RestaurantRepository restaurants;
 
-    @RequestMapping(path = "/api/create-restaurant", method = RequestMethod.POST)
-    public String createRestaurant(String name, String address, String city, String state, Integer zipcode,
-                                   String cuisine, String type, Integer price) {
-        //do some stuff here
-        Restaurant r = new Restaurant(name, address, city, state, zipcode, cuisine, type, price);
-                //"McDonald's", "11 S Church St", "Charlotte", "NC", 28209, "American", "FastFood", 1);
-        restaurants.save(r);
+
+    /** /api/restaurants is used by angular RestaurantsFactory service **/
+
+    /** createRestaurant() **/
+    @RequestMapping(path = "/api/restaurants", method = RequestMethod.POST)
+    public String createRestaurant(@RequestBody Restaurant restaurant) {
+        restaurants.save(restaurant);
         return "redirect:/";
     }
 
     @RequestMapping(path = "/api/restaurants", method = RequestMethod.GET)
     public String getRestaurants() {
-        System.out.println("getRestaurants()");
-        return gson.toJson(restaurants.findAll());
+        System.out.printf("\n\ngetRestaurants() [GET]\n\n");
+        List<Restaurant> restaurantList = (List<Restaurant>)restaurants.findAll();
+        return gson.toJson(restaurantList);
     }
 
-    @RequestMapping(path = "/api/restaurants/{id}", method = RequestMethod.GET)
+    /** /api/restaurant/{id} is used by angular RestaurantFactory service **/
+
+    @RequestMapping(path = "/api/restaurant/{id}", method = RequestMethod.GET)
     public String getRestaurant(@PathVariable(value = "id") Integer id) {
+        System.out.printf("\n\ngetRestaurant() [GET] [id = "+id+"]\n\n");
         return gson.toJson(restaurants.findOne(id));
     }
-    @RequestMapping(path = "/api/restaurants/zipcode/{zipcode}", method = RequestMethod.GET)
-    public String getRestaurantsByZip(@PathVariable(value = "zipcode")Integer zipcode) {
-        return gson.toJson(restaurants.findByZipcode(zipcode));
+
+    @RequestMapping(path = "/api/restaurant/{id}", method = RequestMethod.PUT)
+    public String updateRestaurant(@PathVariable(value = "id") Integer id, @RequestBody Restaurant restaurant) {
+        System.out.printf("\n\nupdateRestaurant() [PUT] [id = "+id+"]\n\n");
+        Restaurant old = restaurants.findOne(id);
+        old.update(restaurant);
+        restaurants.save(old);
+        return "";
     }
 
+    @RequestMapping(path = "/api/restaurant/{id}", method = RequestMethod.DELETE)
+    public String deleteRestaurant(@PathVariable(value = "id") Integer id) {
+        System.out.printf("\n\ndeleteRestaurant() [DELETE] [id = "+id+"]\n\n");
+        restaurants.delete(id);
+        return "";
+    }
+    
 }

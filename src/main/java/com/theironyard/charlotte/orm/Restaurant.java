@@ -11,7 +11,7 @@ public class Restaurant {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Long id;
+    private int id;
 
     @Column(nullable = false)
     private String name;
@@ -37,6 +37,7 @@ public class Restaurant {
     @Column(nullable = false)
     private Integer price;
 
+    public Restaurant() {}
     public Restaurant(String name, String address, String city, String state, Integer zipcode, String cuisine, String type, Integer price) {
         this.name = name;
         this.address = address;
@@ -48,11 +49,11 @@ public class Restaurant {
         this.price = price;
     }
 
-    public Long getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -118,5 +119,16 @@ public class Restaurant {
 
     public void setPrice(Integer price) {
         this.price = price;
+    }
+
+    public void update(Restaurant r) {
+        this.setAddress(r.getAddress());
+        this.setCity(r.getCity());
+        this.setState(r.getState());
+        this.setZipcode(r.getZipcode());
+        this.setName(r.getName());
+        this.setCuisine(r.getCuisine());
+        this.setType(r.getType());
+        this.setPrice(r.getPrice());
     }
 }

@@ -1,5 +1,7 @@
 package com.theironyard.charlotte.controller;
 
+import com.theironyard.charlotte.crud.RestaurantRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Configurable;
 import org.springframework.boot.context.embedded.ConfigurableEmbeddedServletContainer;
 import org.springframework.stereotype.Controller;
@@ -12,7 +14,10 @@ import org.springframework.web.bind.annotation.RequestMethod;
  */
 @Controller
 public class RestaurantController {
-    
+
+    @Autowired
+    RestaurantRepository restaurants;
+
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String home(Model model, ConfigurableEmbeddedServletContainer container) {
         return "home";
