@@ -6,6 +6,7 @@ import com.theironyard.charlotte.orm.Restaurant;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,14 +27,15 @@ public class RestaurantRestController {
     @RequestMapping(path = "/api/restaurants", method = RequestMethod.POST)
     public String createRestaurant(@RequestBody Restaurant restaurant) {
         restaurants.save(restaurant);
-        return "redirect:/";
+
+        return "";
     }
 
     @RequestMapping(path = "/api/restaurants", method = RequestMethod.GET)
-    public String getRestaurants() {
+    public List<Restaurant> getRestaurants() {
         System.out.printf("\n\ngetRestaurants() [GET]\n\n");
         List<Restaurant> restaurantList = (List<Restaurant>)restaurants.findAll();
-        return gson.toJson(restaurantList);
+        return restaurantList;
     }
 
     /** /api/restaurant/{id} is used by angular RestaurantFactory service **/
@@ -59,5 +61,5 @@ public class RestaurantRestController {
         restaurants.delete(id);
         return "";
     }
-    
+
 }
