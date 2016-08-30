@@ -12,7 +12,7 @@ services.factory('RestaurantsFactory', function($resource){
     })
 });
 
-services.factory('RestaurantFactory', function($resouce){
+services.factory('RestaurantFactory', function($resource){
     return $resource('/api/restaurant/:id', {}, {
         show: {
             method: 'GET'

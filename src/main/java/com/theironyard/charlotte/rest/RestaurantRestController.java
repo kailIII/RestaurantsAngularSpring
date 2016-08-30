@@ -27,6 +27,12 @@ public class RestaurantRestController {
         return "redirect:/";
     }
 
+    @RequestMapping(path = "/api/restaurants", method = RequestMethod.GET)
+    public String getRestaurants() {
+        System.out.println("getRestaurants()");
+        return gson.toJson(restaurants.findAll());
+    }
+
     @RequestMapping(path = "/api/restaurants/{id}", method = RequestMethod.GET)
     public String getRestaurant(@PathVariable(value = "id") Integer id) {
         return gson.toJson(restaurants.findOne(id));

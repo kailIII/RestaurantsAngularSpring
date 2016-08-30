@@ -4,7 +4,7 @@ var sass = require('gulp-sass');
 gulp.task('styles', function() {
     gulp.src('src/main/resources/scss/*.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('public/css/'))
+        .pipe(gulp.dest('public/styles/'))
 });
 
 gulp.task('js', function() {
@@ -23,7 +23,7 @@ gulp.task('angular-html', function() {
 
 //Watch task
 gulp.task('default',function() {
-    gulp.watch('src/main/assets/scss/*.scss',['styles']);
-    gulp.watch('src/main/resources/angular/*.js',['js']);
-    gulp.watch('src/main/resources/angular/*.html',['angular-html']);
+    gulp.watch('src/main/resources/sass/*.scss',['styles']);
+    //gulp.watch('src/main/resources/angular/*.js',['js']);
+    //gulp.watch('src/main/resources/angular/*.html',['angular-html']);
 });
