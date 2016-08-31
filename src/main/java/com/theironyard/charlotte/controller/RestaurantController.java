@@ -19,7 +19,7 @@ public class RestaurantController {
     RestaurantRepository restaurants;
 
     @RequestMapping(path = "/", method = RequestMethod.GET)
-    public String home(Model model, ConfigurableEmbeddedServletContainer container) {
+    public String home() {
         return "home";
     }
 }
